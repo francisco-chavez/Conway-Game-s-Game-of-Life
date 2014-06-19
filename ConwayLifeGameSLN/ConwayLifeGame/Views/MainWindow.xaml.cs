@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using Unv.ConwayLifeGame.ViewModels;
+
 
 namespace Unv.ConwayLifeGame.Views
 {
@@ -24,6 +26,7 @@ namespace Unv.ConwayLifeGame.Views
 		public MainWindow()
 		{
 			InitializeComponent();
+			this.DataContext = new MainWindowViewModel();
 		}
 	}
 }
