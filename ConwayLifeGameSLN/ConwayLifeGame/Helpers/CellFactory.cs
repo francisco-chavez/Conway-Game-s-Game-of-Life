@@ -12,6 +12,11 @@ namespace Unv.ConwayLifeGame.Helpers
 {
 	public class CellFactory
 	{
+		#region Events
+		public event EventHandler CellCreationFinished;
+		#endregion
+
+
 		#region Attributes
 		private DispatcherTimer		m_timer;
 		private CellGridViewModel	m_cellGridViewModel;
@@ -33,7 +38,7 @@ namespace Unv.ConwayLifeGame.Helpers
 			m_randomGen = new Random();
 
 			m_timer		= new DispatcherTimer(DispatcherPriority.Input);
-			m_timer.Interval = TimeSpan.FromMilliseconds(50);
+			m_timer.Interval = TimeSpan.FromMilliseconds(25);
 			m_timer.Tick += Timer_Tick;
 		}
 		#endregion
@@ -44,7 +49,7 @@ namespace Unv.ConwayLifeGame.Helpers
 		{
 			int index = m_cells.Count - 1;
 
-			for (int i = 0; i < 10 && index >= 0; i++, index--)
+			for (int i = 0; i < 25 && index >= 0; i++, index--)
 			{
 				var cell = m_cells[index];
 				m_cells.RemoveAt(index);
@@ -52,7 +57,11 @@ namespace Unv.ConwayLifeGame.Helpers
 			}
 
 			if (index < 0)
+			{
 				m_timer.Stop();
+				if (CellCreationFinished != null)
+					CellCreationFinished(this, null);
+			}
 		}
 		#endregion
 

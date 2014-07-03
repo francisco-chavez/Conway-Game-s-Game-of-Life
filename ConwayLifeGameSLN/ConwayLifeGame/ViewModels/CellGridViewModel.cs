@@ -14,7 +14,7 @@ namespace Unv.ConwayLifeGame.ViewModels
 		: ViewModel
 	{
 		#region Attributes
-		private CellFactory m_cellFactory;
+		protected CellFactory m_cellFactory;
 		#endregion
 
 
@@ -60,24 +60,53 @@ namespace Unv.ConwayLifeGame.ViewModels
 			}
 		}
 		private ObservableCollection<CellViewModel> mn_cells;
+
+		public virtual bool IsBusy
+		{
+			get { return mn_isBusy; }
+			protected set
+			{
+				if (mn_isBusy != value)
+				{
+					mn_isBusy = value;
+					OnPropertyChanged("IsBusy");
+				}
+			}
+		}
+		private bool mn_isBusy = false;
 		#endregion
 
 
 		#region Constructors
 		public CellGridViewModel()
 		{
-			m_cellFactory = new CellFactory(this);
 
 			Cells = new ObservableCollection<CellViewModel>();
+
+			m_cellFactory = new CellFactory(this);
+			m_cellFactory.CellCreationFinished += CellFactory_CellCreationFinished;
+		}
+		#endregion
+
+
+		#region Event Handlers
+		void CellFactory_CellCreationFinished(object sender, EventArgs e)
+		{
+			IsBusy = false;
 		}
 		#endregion
 
 
 		#region Methods
-		public void SetNewGrid(int columnCount, int rowCount)
+		public virtual void SetNewGrid(int columnCount, int rowCount)
 		{
+			IsBusy		= true;
 			ColumnCount = columnCount;
-			RowCount = rowCount;
+			RowCount	= rowCount;
+
+			this.Cells.Clear();
+
+			m_cellFactory.CreateCells();
 		}
 		#endregion
 	}
