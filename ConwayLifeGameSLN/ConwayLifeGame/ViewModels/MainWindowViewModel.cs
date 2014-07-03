@@ -10,6 +10,7 @@ namespace Unv.ConwayLifeGame.ViewModels
 	public class MainWindowViewModel
 		: ViewModel
 	{
+		#region Properties
 		public virtual CellGridViewModel CellGridViewModel
 		{
 			get { return mn_cellGridViewModel; }
@@ -23,8 +24,10 @@ namespace Unv.ConwayLifeGame.ViewModels
 			}
 		}
 		private CellGridViewModel mn_cellGridViewModel;
+		#endregion
 
 
+		#region Constructors
 		public MainWindowViewModel()
 		{
 			// I know that the "this." isn't needed, but CellGridViewModel = new CellGridViewModel()
@@ -33,5 +36,6 @@ namespace Unv.ConwayLifeGame.ViewModels
 			// -FCT
 			this.CellGridViewModel = new CellGridViewModel();
 		}
+		#endregion
 	}
 }
