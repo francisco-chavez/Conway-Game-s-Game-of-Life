@@ -57,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\CellGridPanel.cs" />
+    <Compile Include="Helpers\CellFactory.cs" />
     <Compile Include="INPC.cs" />
     <Compile Include="ViewModels\CellGridViewModel.cs" />
     <Compile Include="ViewModels\CellViewModel.cs" />
