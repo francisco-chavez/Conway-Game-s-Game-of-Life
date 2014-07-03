@@ -39,33 +39,33 @@ namespace Unv.ConwayLifeGame.ViewModels
 		}
 		private bool mn_willKeepLiving;
 
-		public int X
+		public int Row
 		{
-			get { return mn_x; }
+			get { return mn_row; }
 			set
 			{
-				if (mn_x != value)
+				if (mn_row != value)
 				{
-					mn_x = value;
-					OnPropertyChanged("X");
+					mn_row = value;
+					OnPropertyChanged("Row");
 				}
 			}
 		}
-		private int mn_x;
+		private int mn_row;
 
-		public int Y
+		public int Column
 		{
-			get { return mn_y; }
+			get { return mn_column; }
 			set
 			{
-				if (mn_y != value)
+				if (mn_column != value)
 				{
-					mn_y = value;
-					OnPropertyChanged("Y");
+					mn_column = value;
+					OnPropertyChanged("Column");
 				}
 			}
 		}
-		private int mn_y;
+		private int mn_column;
 		#endregion
 	}
 }

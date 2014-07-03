@@ -66,6 +66,18 @@ namespace Unv.ConwayLifeGame.Views
 			b.Mode = BindingMode.TwoWay;
 			b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
 			this.SetBinding(CellView.IsAliveProperty, b);
+
+			b = new Binding();
+			b.Path = new PropertyPath("Row");
+			b.Mode = BindingMode.OneWay;
+			b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+			this.SetBinding(Grid.RowProperty, b);
+
+			b = new Binding();
+			b.Path = new PropertyPath("Column");
+			b.Mode = BindingMode.OneWay;
+			b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+			this.SetBinding(Grid.ColumnProperty, b);
 		}
 		#endregion
 
