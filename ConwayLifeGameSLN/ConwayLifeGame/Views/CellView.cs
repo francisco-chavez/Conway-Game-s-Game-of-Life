@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 
 namespace Unv.ConwayLifeGame.Views
@@ -59,6 +60,12 @@ namespace Unv.ConwayLifeGame.Views
 		public CellView()
 		{
 			this.Click += Cell_Click;
+
+			Binding b = new Binding();
+			b.Path = new PropertyPath("IsLiving");
+			b.Mode = BindingMode.TwoWay;
+			b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+			this.SetBinding(CellView.IsAliveProperty, b);
 		}
 		#endregion
 
