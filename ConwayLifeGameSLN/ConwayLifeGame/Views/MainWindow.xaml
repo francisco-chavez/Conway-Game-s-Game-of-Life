@@ -7,7 +7,17 @@
 		Height="500" Width="800"
 		SnapsToDevicePixels="True"
 		UseLayoutRounding="True">
-	
+
+	<Window.Resources>
+		<Style TargetType="Border">
+			<Setter Property="BorderThickness" Value="3"/>
+			<Setter Property="BorderBrush" Value="Green"/>
+			<Setter Property="Padding" Value="4"/>
+			<Setter Property="Margin" Value="0"/>
+			<Setter Property="CornerRadius" Value="1"/>
+		</Style>
+	</Window.Resources>
+
 	<Window.DataContext>
 		<vm:MainWindowViewModel/>
 	</Window.DataContext>
@@ -17,11 +27,21 @@
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="auto"/>
 		</Grid.RowDefinitions>
-		
-		<views:CellGridView DataContext="{Binding CellGridViewModel}"
-							Grid.Row="0"/>
-		<views:CellGridMetaDataView DataContext="{Binding CellGridViewModel}"
-									Grid.Row="1"
-									HorizontalAlignment="Center"/>
-    </Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="auto"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+
+		<Border Grid.Row="0" 
+				Grid.ColumnSpan="3">
+			<views:CellGridView DataContext="{Binding CellGridViewModel}"/>
+		</Border>
+		<Border Grid.Row="1" Grid.Column="1"
+				Margin="0 -3 0 0">
+			<views:CellGridMetaDataView DataContext="{Binding CellGridViewModel}"
+										Grid.Row="1"
+										HorizontalAlignment="Center"/>
+		</Border>
+	</Grid>
 </Window>
