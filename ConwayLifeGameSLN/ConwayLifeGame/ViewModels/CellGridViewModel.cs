@@ -13,6 +13,11 @@ namespace Unv.ConwayLifeGame.ViewModels
 	public class CellGridViewModel
 		: ViewModel
 	{
+		#region Events
+		public event EventHandler GridSizeUpdated;
+		#endregion
+
+
 		#region Attributes
 		protected CellFactory m_cellFactory;
 		#endregion
@@ -74,6 +79,20 @@ namespace Unv.ConwayLifeGame.ViewModels
 			}
 		}
 		private bool mn_isBusy = false;
+
+		public virtual bool FormationLocked
+		{
+			get { return mn_formationLocked; }
+			protected set
+			{
+				if (mn_formationLocked != value)
+				{
+					mn_formationLocked = value;
+					OnPropertyChanged("FormationLocked");
+				}
+			}
+		}
+		private bool mn_formationLocked;
 		#endregion
 
 
@@ -92,7 +111,8 @@ namespace Unv.ConwayLifeGame.ViewModels
 		#region Event Handlers
 		void CellFactory_CellCreationFinished(object sender, EventArgs e)
 		{
-			IsBusy = false;
+			IsBusy			= false;
+			FormationLocked = false;
 		}
 		#endregion
 
@@ -100,11 +120,15 @@ namespace Unv.ConwayLifeGame.ViewModels
 		#region Methods
 		public virtual void SetNewGrid(int columnCount, int rowCount)
 		{
-			IsBusy		= true;
-			ColumnCount = columnCount;
-			RowCount	= rowCount;
+			IsBusy			= true;
+			FormationLocked = true;
+			ColumnCount		= columnCount;
+			RowCount		= rowCount;
 
 			this.Cells.Clear();
+
+			if (GridSizeUpdated != null)
+				GridSizeUpdated(this, null);
 
 			m_cellFactory.CreateCells();
 		}
