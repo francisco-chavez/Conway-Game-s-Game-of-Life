@@ -17,6 +17,21 @@
 			</ItemsPanelTemplate>
 		</ListBox.ItemsPanel>
 		
+		<ListBox.ItemContainerStyle>
+			<Style TargetType="ListBoxItem">
+				<Setter Property="Grid.Column" Value="{Binding Column}"/>
+				<Setter Property="Grid.Row" Value="{Binding Row}"/>
+				
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="ListBoxItem">
+							<ContentPresenter/>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+		</ListBox.ItemContainerStyle>
+		
 		<ListBox.ItemTemplate>
 			<DataTemplate DataType="vm:CellViewModel">
 				<views:CellView/>
