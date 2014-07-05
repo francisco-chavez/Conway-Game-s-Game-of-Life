@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Unv.ConwayLifeGame.Controls;
 using Unv.ConwayLifeGame.ViewModels;
 
 
@@ -21,6 +22,13 @@ namespace Unv.ConwayLifeGame.Views
 	/// <summary>
 	/// Interaction logic for CellGridView.xaml
 	/// </summary>
+	/// <remarks>
+	/// Yes, I know that I coupled the CellGridView to the CellGridViewModel, but
+	/// please keep in mind that the CellGridViewModel is NOT coupled to the
+	/// CellGridView. Most views in MVVM are sort of coupled to their view-models
+	/// because the bindings tend to be hard coded. 
+	/// -FCT
+	/// </remarks>
 	public partial class CellGridView 
 		: UserControl
 	{
@@ -94,16 +102,36 @@ namespace Unv.ConwayLifeGame.Views
 
 		private void UpdateGridSize(object source, EventArgs e)
 		{
-			PART_Grid.ColumnDefinitions.Clear();
-			PART_Grid.RowDefinitions.Clear();
-
 			if (ViewModel == null)
 				return;
 
-			for (int i = 0; i < ViewModel.ColumnCount; i++)
-				PART_Grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1.0, GridUnitType.Star) });
-			for (int i = 0; i < ViewModel.RowCount; i++)
-				PART_Grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1.0, GridUnitType.Star) });
+			var cellGridPanel = FindCellGrid(this.PART_ItemsControl) as UIElement;
+
+			if (cellGridPanel == null)
+				return;
+
+			CellGridPanel.SetColumnCount(cellGridPanel, ViewModel.ColumnCount);
+			CellGridPanel.SetRowCount(cellGridPanel, ViewModel.RowCount);
+		}
+
+		private DependencyObject FindCellGrid(DependencyObject parent)
+		{
+			int childCount = VisualTreeHelper.GetChildrenCount(parent);
+			DependencyObject result = null;
+			for(int i = 0; i < childCount; i++)
+			{
+				result = VisualTreeHelper.GetChild(parent, i) as DependencyObject;
+
+				if (result is CellGridPanel)
+					break;
+					
+				result = FindCellGrid(result);
+
+				if (result != null)
+					break;
+			}
+
+			return result;
 		}
 		#endregion
 	}
