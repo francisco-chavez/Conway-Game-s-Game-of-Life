@@ -68,7 +68,7 @@ namespace Unv.ConwayLifeGame.Controls
 			obj.ColumnDefinitions.Clear();
 
 			for (int i = 0; i < columnCount; i++)
-				obj.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1.0, GridUnitType.Star) });
+				obj.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1.0, GridUnitType.Auto) });
 		}
 
 		private static void RowCount_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -82,7 +82,7 @@ namespace Unv.ConwayLifeGame.Controls
 			obj.RowDefinitions.Clear();
 
 			for (int i = 0; i < rowCount; i++)
-				obj.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1.0, GridUnitType.Star) });
+				obj.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1.0, GridUnitType.Auto) });
 		}
 		#endregion
 

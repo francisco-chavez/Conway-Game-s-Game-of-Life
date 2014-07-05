@@ -8,34 +8,35 @@
 			 xmlns:ctrl="clr-namespace:Unv.ConwayLifeGame.Controls"
 			 xmlns:vm="clr-namespace:Unv.ConwayLifeGame.ViewModels"
              d:DesignHeight="300" d:DesignWidth="300">
-	<ListBox x:Name="PART_ItemsControl" ItemsSource="{Binding Cells}">
-		
-		<ListBox.ItemsPanel>
-			<ItemsPanelTemplate>
-				<ctrl:CellGridPanel ShowGridLines="True"
-									IsItemsHost="True"/>
-			</ItemsPanelTemplate>
-		</ListBox.ItemsPanel>
-		
-		<ListBox.ItemContainerStyle>
-			<Style TargetType="ListBoxItem">
-				<Setter Property="Grid.Column" Value="{Binding Column}"/>
-				<Setter Property="Grid.Row" Value="{Binding Row}"/>
-				
-				<Setter Property="Template">
-					<Setter.Value>
-						<ControlTemplate TargetType="ListBoxItem">
-							<ContentPresenter/>
-						</ControlTemplate>
-					</Setter.Value>
-				</Setter>
-			</Style>
-		</ListBox.ItemContainerStyle>
-		
-		<ListBox.ItemTemplate>
-			<DataTemplate DataType="vm:CellViewModel">
-				<views:CellView/>
-			</DataTemplate>
-		</ListBox.ItemTemplate>
-	</ListBox>
+	<Viewbox>
+		<ListBox x:Name="PART_ItemsControl" ItemsSource="{Binding Cells}">
+
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<ctrl:CellGridPanel IsItemsHost="True"/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+
+			<ListBox.ItemContainerStyle>
+				<Style TargetType="ListBoxItem">
+					<Setter Property="Grid.Column" Value="{Binding Column}"/>
+					<Setter Property="Grid.Row" Value="{Binding Row}"/>
+
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="ListBoxItem">
+								<ContentPresenter/>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</ListBox.ItemContainerStyle>
+
+			<ListBox.ItemTemplate>
+				<DataTemplate DataType="vm:CellViewModel">
+					<views:CellView/>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+	</Viewbox>
 </UserControl>

@@ -5,12 +5,12 @@
 	<ControlTemplate x:Key="CellTemplate" TargetType="views:CellView">
 		<Rectangle Fill="White"
 				   Stroke="Black"
-				   StrokeThickness="1.1"/>
+				   StrokeThickness="1"/>
 	</ControlTemplate>
 	
 	<Style TargetType="views:CellView">
-		<Setter Property="Width" Value="10"/>
-		<Setter Property="Height" Value="10"/>
+		<Setter Property="Width" Value="40"/>
+		<Setter Property="Height" Value="40"/>
 		
 		<Setter Property="Template" Value="{StaticResource CellTemplate}"/>
 	</Style>
