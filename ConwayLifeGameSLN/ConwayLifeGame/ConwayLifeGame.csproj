@@ -95,11 +95,15 @@
     </Compile>
     <Compile Include="Helpers\CellFactory.cs" />
     <Compile Include="INPC.cs" />
+    <Compile Include="Model\CellGridState.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModels\CellGridViewModel.cs" />
     <Compile Include="ViewModels\CellViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="Views\CellGridControlView.xaml.cs">
+      <DependentUpon>CellGridControlView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CellGridMetaDataView.xaml.cs">
       <DependentUpon>CellGridMetaDataView.xaml</DependentUpon>
     </Compile>
@@ -119,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CellGridControlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
