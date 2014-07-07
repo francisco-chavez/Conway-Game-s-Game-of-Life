@@ -72,6 +72,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\CellGridPanel.cs" />
+    <Compile Include="Dialogs\NewGridDialog.xaml.cs">
+      <DependentUpon>NewGridDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\CellFactory.cs" />
     <Compile Include="INPC.cs" />
     <Compile Include="ViewModels\CellGridViewModel.cs" />
@@ -92,6 +95,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Dialogs\NewGridDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -31,7 +31,9 @@
 					<ctrl:CellGridPanel IsItemsHost="True"
 										Margin="0"
 										SnapsToDevicePixels="True"
-										UseLayoutRounding="True"/>
+										UseLayoutRounding="True"
+										ctrl:CellGridPanel.ColumnCount="3"
+										ctrl:CellGridPanel.RowCount="3"/>
 				</ItemsPanelTemplate>
 			</ListBox.ItemsPanel>
 
