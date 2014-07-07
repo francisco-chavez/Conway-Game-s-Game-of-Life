@@ -21,9 +21,20 @@ namespace Unv.ConwayLifeGame.Dialogs
 	public partial class NewGridDialog 
 		: Window
 	{
+		#region Constructors
 		public NewGridDialog()
 		{
 			InitializeComponent();
+			this.DataContext = this;
 		}
+		#endregion
+
+
+		#region Event Handlers
+		private void Create_Click(object sender, RoutedEventArgs e)
+		{
+			this.DialogResult = true;
+		}
+		#endregion
 	}
 }
