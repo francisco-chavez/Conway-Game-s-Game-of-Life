@@ -9,11 +9,29 @@
 			 xmlns:vm="clr-namespace:Unv.ConwayLifeGame.ViewModels"
              d:DesignHeight="300" d:DesignWidth="300">
 	<Viewbox>
-		<ListBox x:Name="PART_ItemsControl" ItemsSource="{Binding Cells}">
+		<ListBox x:Name="PART_ItemsControl" 
+				 ItemsSource="{Binding Cells}"
+				 Foreground="Blue"
+				 Background="White"
+				 Padding="0">
+			
+			<ListBox.Template>
+				<ControlTemplate TargetType="ListBox">
+					<Border BorderBrush="{TemplateBinding Foreground}"
+							Background="{TemplateBinding Background}"
+							BorderThickness="1"
+							Padding="{TemplateBinding Padding}">
+						<ItemsPresenter/>
+					</Border>
+				</ControlTemplate>
+			</ListBox.Template>
 
 			<ListBox.ItemsPanel>
 				<ItemsPanelTemplate>
-					<ctrl:CellGridPanel IsItemsHost="True"/>
+					<ctrl:CellGridPanel IsItemsHost="True"
+										Margin="0"
+										SnapsToDevicePixels="True"
+										UseLayoutRounding="True"/>
 				</ItemsPanelTemplate>
 			</ListBox.ItemsPanel>
 

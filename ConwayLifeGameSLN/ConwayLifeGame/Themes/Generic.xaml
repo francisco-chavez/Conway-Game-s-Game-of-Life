@@ -3,15 +3,22 @@
 					xmlns:views="clr-namespace:Unv.ConwayLifeGame.Views">
 	
 	<ControlTemplate x:Key="CellTemplate" TargetType="views:CellView">
-		<Rectangle Fill="White"
-				   Stroke="Black"
+		<Rectangle Fill="{TemplateBinding Background}"
+				   Stroke="{TemplateBinding Foreground}"
 				   StrokeThickness="1"/>
 	</ControlTemplate>
 	
 	<Style TargetType="views:CellView">
-		<Setter Property="Width" Value="40"/>
-		<Setter Property="Height" Value="40"/>
+		<Setter Property="Width" Value="30"/>
+		<Setter Property="Height" Value="30"/>
+		<Setter Property="Background" Value="Transparent"/>
 		
 		<Setter Property="Template" Value="{StaticResource CellTemplate}"/>
+		
+		<Style.Triggers>
+			<Trigger Property="IsAlive" Value="True">
+				<Setter Property="Background" Value="Black"/>
+			</Trigger>
+		</Style.Triggers>
 	</Style>
 </ResourceDictionary>
