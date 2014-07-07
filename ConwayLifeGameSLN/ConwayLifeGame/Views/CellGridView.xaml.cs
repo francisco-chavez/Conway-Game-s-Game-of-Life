@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 using Unv.ConwayLifeGame.Controls;
+using Unv.ConwayLifeGame.Model;
 using Unv.ConwayLifeGame.ViewModels;
 
 
@@ -64,8 +65,24 @@ namespace Unv.ConwayLifeGame.Views
 		{
 			InitializeComponent();
 
-			Binding b = new Binding();
+
+			Binding b;
+
+			//b = new Binding("CellGridState");
+			//b.Mode = BindingMode.OneWay;
+			//b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+			//this.SetBinding(CellGridStateProperty, b);
+
+			b = new Binding();
+			b.Path = new PropertyPath("CellGridState");
+			b.Mode = BindingMode.OneWay;
+			b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+			b.Converter = new GridStateToMouseInterationConverter();
+			this.SetBinding(IsHitTestVisibleProperty, b);
+
+			b = new Binding();
 			this.SetBinding(ViewModelProperty, b);
+
 
 			this.Loaded += CellGridView_Loaded;
 		}
@@ -134,5 +151,21 @@ namespace Unv.ConwayLifeGame.Views
 			return result;
 		}
 		#endregion
+	}
+
+	public class GridStateToMouseInterationConverter
+		: IValueConverter
+	{
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			var state = value as CellGridState?;
+
+			return state.HasValue ? state.Value == CellGridState.SettingInitialGeneration : false;
+		}
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

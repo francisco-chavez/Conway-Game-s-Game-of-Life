@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Unv.ConwayLifeGame.Helpers;
+using Unv.ConwayLifeGame.Model;
 
 
 namespace Unv.ConwayLifeGame.ViewModels
@@ -93,13 +94,26 @@ namespace Unv.ConwayLifeGame.ViewModels
 			}
 		}
 		private bool mn_formationLocked;
+
+		public virtual CellGridState CellGridState
+		{
+			get { return mn_cellGridState; }
+			protected set
+			{
+				if (mn_cellGridState != value)
+				{
+					mn_cellGridState = value;
+					OnPropertyChanged("CellGridState");
+				}
+			}
+		}
+		private CellGridState mn_cellGridState = CellGridState.ManualProgression;
 		#endregion
 
 
 		#region Constructors
 		public CellGridViewModel()
 		{
-
 			Cells = new ObservableCollection<CellViewModel>();
 
 			m_cellFactory = new CellFactory(this);
@@ -111,8 +125,9 @@ namespace Unv.ConwayLifeGame.ViewModels
 		#region Event Handlers
 		void CellFactory_CellCreationFinished(object sender, EventArgs e)
 		{
-			IsBusy			= false;
-			FormationLocked = false;
+			this.IsBusy				= false;
+			this.FormationLocked	= false;
+			this.CellGridState		= CellGridState.SettingInitialGeneration;
 		}
 		#endregion
 

@@ -32,8 +32,8 @@
 										Margin="0"
 										SnapsToDevicePixels="True"
 										UseLayoutRounding="True"
-										ctrl:CellGridPanel.ColumnCount="3"
-										ctrl:CellGridPanel.RowCount="3"/>
+										MinHeight="20"
+										MinWidth="20"/>
 				</ItemsPanelTemplate>
 			</ListBox.ItemsPanel>
 
