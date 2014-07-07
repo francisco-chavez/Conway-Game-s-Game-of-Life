@@ -20,5 +20,4 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
-*.xaml diff=astextplain
-
+*.xaml	 diff=astextplain
