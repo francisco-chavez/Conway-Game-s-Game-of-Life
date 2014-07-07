@@ -34,7 +34,9 @@
 										HorizontalAlignment="Center"/>
 		</Border>
 		
-		<Button Content="Start New..." 
+		<Button Content="Start New..."
+				Command="{Binding Path=CreateNewCellGridCommand, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+				CommandParameter="{Binding Path=IsBusy, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
 				Grid.Column="2" Grid.Row="1"
 				Padding="2"
 				Margin="2 2 2 4"

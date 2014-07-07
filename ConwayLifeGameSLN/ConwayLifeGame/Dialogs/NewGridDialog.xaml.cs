@@ -58,6 +58,9 @@ namespace Unv.ConwayLifeGame.Dialogs
 		{
 			InitializeComponent();
 			this.DataContext = this;
+
+			this.ColumnCount	= 10;
+			this.RowCount		= 10;
 		}
 		#endregion
 
@@ -65,10 +68,7 @@ namespace Unv.ConwayLifeGame.Dialogs
 		#region Event Handlers
 		private void Create_Click(object sender, RoutedEventArgs e)
 		{
-			this.DialogResult	= true;
-
-			this.ColumnCount	= 10;
-			this.RowCount		= 10;
+			this.DialogResult = true;
 		}
 		#endregion
 
