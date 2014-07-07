@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="Helpers\CellFactory.cs" />
     <Compile Include="INPC.cs" />
+    <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModels\CellGridViewModel.cs" />
     <Compile Include="ViewModels\CellViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
