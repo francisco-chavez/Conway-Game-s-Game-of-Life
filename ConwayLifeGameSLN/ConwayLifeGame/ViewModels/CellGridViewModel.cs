@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 using Unv.ConwayLifeGame.Helpers;
 using Unv.ConwayLifeGame.Model;
@@ -133,5 +135,33 @@ namespace Unv.ConwayLifeGame.ViewModels
 			m_cellFactory.CreateCells();
 		}
 		#endregion
+	}
+
+	public class CellGridStateTextConverter
+		: IValueConverter
+	{
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			var state = (CellGridState) value;
+			switch (state)
+			{
+			case CellGridState.AutoProgression:
+				return "Auto Run";
+			case CellGridState.LoadingCells:
+				return "Loading";
+			case CellGridState.ManualProgression:
+				return "Manual";
+			case CellGridState.SettingInitialGeneration:
+				return "Seed State";
+			default:
+				return string.Empty;
+			}
+			throw new NotImplementedException();
+		}
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

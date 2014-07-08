@@ -3,19 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:vms="clr-namespace:Unv.ConwayLifeGame.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="20" d:DesignWidth="300">
+	
 	<UserControl.Resources>
 		<Style TargetType="TextBlock">
 			<Setter Property="MinWidth" Value="10"/>
 		</Style>
+		
+		<vms:CellGridStateTextConverter x:Key="GameStateConverter"/>
 	</UserControl.Resources>
+	
 	<StackPanel Orientation="Horizontal">
 		<TextBlock Text="Rows: "/>
 		<TextBlock Text="{Binding RowCount}"/>
 		<TextBlock Text="Columns: " Margin="6 0 0 0"/>
 		<TextBlock Text="{Binding ColumnCount}"/>
-		<TextBlock Text="Is Running: " Margin="6 0 0 0"/>
-		<TextBlock Text="{Binding FormationLocked}"/>
+		<TextBlock Text="Game State: " Margin="6 0 0 0"/>
+		<TextBlock Text="{Binding Path=CellGridState, 
+								  Mode=OneWay, 
+								  UpdateSourceTrigger=PropertyChanged, 
+								  Converter={StaticResource GameStateConverter}}"
+				   MinWidth="40"/>
 	</StackPanel>
 </UserControl>
