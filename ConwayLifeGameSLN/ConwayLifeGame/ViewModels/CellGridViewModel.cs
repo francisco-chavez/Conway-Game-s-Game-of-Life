@@ -81,20 +81,6 @@ namespace Unv.ConwayLifeGame.ViewModels
 		}
 		private bool mn_isBusy = false;
 
-		public virtual bool FormationLocked
-		{
-			get { return mn_formationLocked; }
-			protected set
-			{
-				if (mn_formationLocked != value)
-				{
-					mn_formationLocked = value;
-					OnPropertyChanged("FormationLocked");
-				}
-			}
-		}
-		private bool mn_formationLocked;
-
 		public virtual CellGridState CellGridState
 		{
 			get { return mn_cellGridState; }
@@ -126,7 +112,6 @@ namespace Unv.ConwayLifeGame.ViewModels
 		void CellFactory_CellCreationFinished(object sender, EventArgs e)
 		{
 			this.IsBusy				= false;
-			this.FormationLocked	= false;
 			this.CellGridState		= CellGridState.SettingInitialGeneration;
 		}
 		#endregion
@@ -135,10 +120,10 @@ namespace Unv.ConwayLifeGame.ViewModels
 		#region Methods
 		public virtual void SetNewGrid(int columnCount, int rowCount)
 		{
-			IsBusy			= true;
-			FormationLocked = true;
-			ColumnCount		= columnCount;
-			RowCount		= rowCount;
+			this.IsBusy				= true;
+			this.CellGridState		= CellGridState.LoadingCells;
+			this.ColumnCount		= columnCount;
+			this.RowCount			= rowCount;
 
 			this.Cells.Clear();
 

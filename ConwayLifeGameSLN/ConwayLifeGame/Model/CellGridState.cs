@@ -10,6 +10,7 @@ namespace Unv.ConwayLifeGame.Model
 	{
 		SettingInitialGeneration	= 0,
 		ManualProgression			= 1,
-		AutoProgression				= 2
+		AutoProgression				= 2,
+		LoadingCells				= 3
 	}
 }
