@@ -11,6 +11,9 @@ namespace Unv.ConwayLifeGame.ViewModels
 		: ViewModel
 	{
 		#region Properties
+		/// <summary>
+		/// Gets or sets the the cell's state of life.
+		/// </summary>
 		public bool IsLiving
 		{
 			get { return mn_isLiving; }
@@ -25,6 +28,9 @@ namespace Unv.ConwayLifeGame.ViewModels
 		}
 		private bool mn_isLiving;
 
+		/// <summary>
+		/// Gets or sets if the cell will be dead or alive when we enter the next step.
+		/// </summary>
 		public bool WillKeepLiving
 		{
 			get { return mn_willKeepLiving; }
@@ -39,6 +45,9 @@ namespace Unv.ConwayLifeGame.ViewModels
 		}
 		private bool mn_willKeepLiving;
 
+		/// <summary>
+		/// Gets or sets the cell's row position in the cell grid.
+		/// </summary>
 		public int Row
 		{
 			get { return mn_row; }
@@ -53,6 +62,9 @@ namespace Unv.ConwayLifeGame.ViewModels
 		}
 		private int mn_row;
 
+		/// <summary>
+		/// Gets or sets the cell's column position in the cell grid.
+		/// </summary>
 		public int Column
 		{
 			get { return mn_column; }

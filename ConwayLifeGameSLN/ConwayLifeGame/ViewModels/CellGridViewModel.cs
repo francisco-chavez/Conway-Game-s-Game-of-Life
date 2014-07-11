@@ -154,8 +154,14 @@ namespace Unv.ConwayLifeGame.ViewModels
 
 
 		#region Methods
+		/// <summary>
+		/// This method is used flush out the CellGridViewModel and change the grid size.
+		/// </summary>
 		public virtual void SetNewGrid(int columnCount, int rowCount)
 		{
+			if (IsBusy)
+				throw new InvalidOperationException("The Cell Grid View Model is too busy to changes its settings right now.");
+			
 			this.IsBusy				= true;
 			this.CellGridState		= CellGridState.LoadingCells;
 			this.ColumnCount		= columnCount;

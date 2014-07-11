@@ -31,7 +31,6 @@ namespace Unv.ConwayLifeGame.ViewModels
 
 
 		#region Properties
-		private RelayCommand m_createNewCellGridCommand;
 		public ICommand CreateNewCellGridCommand
 		{
 			get
@@ -42,6 +41,7 @@ namespace Unv.ConwayLifeGame.ViewModels
 				return m_createNewCellGridCommand;
 			}
 		}
+		private RelayCommand m_createNewCellGridCommand;
 		#endregion
 
 
@@ -60,16 +60,22 @@ namespace Unv.ConwayLifeGame.ViewModels
 		#region Methods
 		private void CreateNewCellGridExecute(object parameters)
 		{
+			// Prep the dialog that's used to get User input.
 			var dlg = new NewGridDialog();
 			dlg.ColumnCount = this.CellGridViewModel.ColumnCount;
-			dlg.RowCount = this.CellGridViewModel.RowCount;
-			dlg.Owner = App.Current.MainWindow;
+			dlg.RowCount	= this.CellGridViewModel.RowCount;
+			dlg.Owner		= App.Current.MainWindow;
 
+			// Launch the dialog and find out if the User
+			// really wants to do what they are about to
+			// do.
 			bool keepGoing = dlg.ShowDialog() == true;
 
 			if (!keepGoing)
 				return;
 
+			// Use the User's input to start the creating of a new
+			// Cell Grid.
 			this.CellGridViewModel.SetNewGrid(dlg.ColumnCount, dlg.RowCount);
 		}
 
