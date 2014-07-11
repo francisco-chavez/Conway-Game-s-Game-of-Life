@@ -6,7 +6,8 @@ using System.Windows;
 namespace Unv.ConwayLifeGame.Dialogs
 {
 	/// <summary>
-	/// Interaction logic for NewGridDialog.xaml
+	/// This Dialog is used for getting the size
+	/// for a new Cell Grid from the User.
 	/// </summary>
 	public sealed partial class NewGridDialog 
 		: Window, INotifyPropertyChanged

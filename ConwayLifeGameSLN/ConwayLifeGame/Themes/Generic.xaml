@@ -2,12 +2,18 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:views="clr-namespace:Unv.ConwayLifeGame.Views">
 	
+	<!--**********-->
+	<!-- CellView -->
+	<!--**********-->
+	
+	<!-- This is the default template used by the CellView controls -->
 	<ControlTemplate x:Key="CellTemplate" TargetType="views:CellView">
 		<Rectangle Fill="{TemplateBinding Background}"
 				   Stroke="{TemplateBinding Foreground}"
 				   StrokeThickness="1"/>
 	</ControlTemplate>
 	
+	<!-- This is the default style used by the CellView controls -->
 	<Style TargetType="views:CellView">
 		<Setter Property="Width" Value="30"/>
 		<Setter Property="Height" Value="30"/>
