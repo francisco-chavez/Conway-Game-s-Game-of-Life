@@ -27,6 +27,9 @@ namespace Unv.ConwayLifeGame.ViewModels
 
 
 		#region Properties
+		/// <summary>
+		/// Gets the number of rows in the cell grid.
+		/// </summary>
 		public virtual int RowCount
 		{
 			get { return mn_rowCount; }
@@ -41,6 +44,9 @@ namespace Unv.ConwayLifeGame.ViewModels
 		}
 		private int mn_rowCount;
 
+		/// <summary>
+		/// Gets the number of columns in the cell grid.
+		/// </summary>
 		public virtual int ColumnCount
 		{
 			get { return mn_columnCount; }
@@ -55,6 +61,9 @@ namespace Unv.ConwayLifeGame.ViewModels
 		}
 		private int mn_columnCount;
 
+		/// <summary>
+		/// Gets the collection containing the cells in the cell grid.
+		/// </summary>
 		public virtual ObservableCollection<CellViewModel> Cells
 		{
 			get { return mn_cells; }
@@ -69,6 +78,11 @@ namespace Unv.ConwayLifeGame.ViewModels
 		}
 		private ObservableCollection<CellViewModel> mn_cells;
 
+		/// <summary>
+		/// When the Cell Grid View Model is currently busy, then it's not
+		/// a good time to make changes to the cell grid view model (unless
+		/// you're the reason it's busy).
+		/// </summary>
 		public virtual bool IsBusy
 		{
 			get { return mn_isBusy; }
@@ -83,6 +97,9 @@ namespace Unv.ConwayLifeGame.ViewModels
 		}
 		private bool mn_isBusy = false;
 
+		/// <summary>
+		/// Gets the current Cell Grid State of the Cell Grid View Model.
+		/// </summary>
 		public virtual CellGridState CellGridState
 		{
 			get { return mn_cellGridState; }
@@ -96,6 +113,23 @@ namespace Unv.ConwayLifeGame.ViewModels
 			}
 		}
 		private CellGridState mn_cellGridState = CellGridState.ManualProgression;
+
+		/// <summary>
+		/// Gets the current step/generation of the game.
+		/// </summary>
+		public virtual int CellGeneration
+		{
+			get { return mn_cellGeneration; }
+			protected set
+			{
+				if (mn_cellGeneration != value)
+				{
+					mn_cellGeneration = value;
+					OnPropertyChanged("CellGeneration");
+				}
+			}
+		}
+		private int mn_cellGeneration;
 		#endregion
 
 
@@ -126,17 +160,21 @@ namespace Unv.ConwayLifeGame.ViewModels
 			this.CellGridState		= CellGridState.LoadingCells;
 			this.ColumnCount		= columnCount;
 			this.RowCount			= rowCount;
+			this.CellGeneration		= 0;
 
 			this.Cells.Clear();
 
 			if (GridSizeUpdated != null)
 				GridSizeUpdated(this, null);
 
-			m_cellFactory.CreateCells();
+			m_cellFactory.CreateCellsAsync();
 		}
 		#endregion
 	}
 
+	/// <summary>
+	/// This converter is really more like a ToString() method for the CellGridState enum.
+	/// </summary>
 	public class CellGridStateTextConverter
 		: IValueConverter
 	{
@@ -156,7 +194,6 @@ namespace Unv.ConwayLifeGame.ViewModels
 			default:
 				return string.Empty;
 			}
-			throw new NotImplementedException();
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
