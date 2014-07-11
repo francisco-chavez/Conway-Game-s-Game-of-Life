@@ -13,7 +13,8 @@
 				 ItemsSource="{Binding Cells}"
 				 Foreground="Blue"
 				 Background="White"
-				 Padding="0">
+				 Padding="0"
+				 IsTabStop="False">
 			
 			<ListBox.Template>
 				<ControlTemplate TargetType="ListBox">
@@ -41,6 +42,7 @@
 				<Style TargetType="ListBoxItem">
 					<Setter Property="Grid.Column" Value="{Binding Column}"/>
 					<Setter Property="Grid.Row" Value="{Binding Row}"/>
+					<Setter Property="IsTabStop" Value="False"/>
 
 					<Setter Property="Template">
 						<Setter.Value>

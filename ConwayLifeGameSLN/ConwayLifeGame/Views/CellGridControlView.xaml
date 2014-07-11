@@ -3,8 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:help="clr-namespace:Unv.ConwayLifeGame.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="300">
+	
+	<UserControl.Resources>
+		<help:BoolToContentConverter x:Key="ButtonContentConverter"
+									 TrueContent="Stop"
+									 FalseContent="Start"
+									 NullContent="???"/>
+	</UserControl.Resources>
+	
 	<StackPanel Orientation="Horizontal">
 		<TextBlock Text="Generation: "
 				   VerticalAlignment="Center"/>
@@ -13,7 +22,10 @@
 				   VerticalAlignment="Center"
 				   TextAlignment="Right"
 				   Margin="0 0 6 0"/>
-		<Button/>
+		<Button Content="{Binding Path=IsOnAuto, 
+								  Mode=OneWay, 
+								  UpdateSourceTrigger=PropertyChanged, 
+								  Converter={StaticResource ButtonContentConverter}}"/>
 		<Button Content="Step"/>
 	</StackPanel>
 </UserControl>

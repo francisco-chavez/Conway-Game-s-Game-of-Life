@@ -109,6 +109,7 @@ namespace Unv.ConwayLifeGame.ViewModels
 				{
 					mn_cellGridState = value;
 					OnPropertyChanged("CellGridState");
+					OnPropertyChanged("IsOnAuto");
 				}
 			}
 		}
@@ -130,6 +131,11 @@ namespace Unv.ConwayLifeGame.ViewModels
 			}
 		}
 		private int mn_cellGeneration;
+
+		public virtual bool IsOnAuto
+		{
+			get { return this.CellGridState == CellGridState.AutoProgression; }
+		}
 		#endregion
 
 
