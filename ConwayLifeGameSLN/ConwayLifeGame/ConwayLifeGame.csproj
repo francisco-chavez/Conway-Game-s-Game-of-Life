@@ -93,6 +93,7 @@
     <Compile Include="Dialogs\NewGridDialog.xaml.cs">
       <DependentUpon>NewGridDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BoolToContentConverter.cs" />
     <Compile Include="Helpers\CellFactory.cs" />
     <Compile Include="INPC.cs" />
     <Compile Include="Model\CellGridState.cs" />
