@@ -16,6 +16,12 @@
 			<Setter Property="Margin" Value="0"/>
 			<Setter Property="CornerRadius" Value="1"/>
 		</Style>
+		
+		<Style TargetType="Button">
+			<Setter Property="MinWidth" Value="40"/>
+			<Setter Property="Margin" Value="2"/>
+			<Setter Property="Padding" Value="2"/>
+		</Style>
 	</Window.Resources>
 
 	<Window.DataContext>
@@ -42,6 +48,9 @@
 				Margin="2 2 2 4"
 				HorizontalAlignment="Left"
 				ToolTip="Leads to the creation of a new Cell Grid."/>
+
+		<views:CellGridControlView DataContext="{Binding CellGridViewModel}" 
+								   Grid.Column="0" Grid.Row="1"/>
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>

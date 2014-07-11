@@ -10,6 +10,7 @@
 	<UserControl.Resources>
 		<Style TargetType="TextBlock">
 			<Setter Property="MinWidth" Value="10"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
 		</Style>
 		
 		<vms:CellGridStateTextConverter x:Key="GameStateConverter"/>
