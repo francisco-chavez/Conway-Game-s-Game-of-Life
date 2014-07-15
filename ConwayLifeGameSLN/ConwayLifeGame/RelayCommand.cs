@@ -4,6 +4,11 @@ using System.Windows.Input;
 
 namespace Unv.ConwayLifeGame
 {
+	/// <summary>
+	/// This is pretty much your average implementation of the
+	/// RelayCommand class. It allows you to create commands
+	/// without having to write a new class for each command.
+	/// </summary>
 	public class RelayCommand
 		: ICommand
 	{
