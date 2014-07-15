@@ -23,7 +23,9 @@ namespace Unv.ConwayLifeGame.ViewModels
 
 
 		#region Attributes
-		protected CellFactory m_cellFactory;
+		protected CellFactory			m_cellFactory;
+		protected CellViewModel[]		m_cells;
+		protected ConwayCellProgressor	m_cellStepProgressor = new ConwayCellProgressor();
 		#endregion
 
 
@@ -178,6 +180,8 @@ namespace Unv.ConwayLifeGame.ViewModels
 		#region Event Handlers
 		void CellFactory_CellCreationFinished(object sender, EventArgs e)
 		{
+			m_cells = this.Cells.ToArray();
+
 			this.IsBusy				= false;
 			this.CellGridState		= CellGridState.SettingInitialGeneration;
 		}
@@ -231,7 +235,9 @@ namespace Unv.ConwayLifeGame.ViewModels
 
 		private void GameProgressStep(object parameters)
 		{
-			throw new NotImplementedException();
+			this.CellGridState = CellGridState.ManualProgression;
+			m_cellStepProgressor.StepCells(m_cells, this.ColumnCount, this.RowCount);
+			this.CellGeneration++;
 		}
 
 		private bool GameProgressStepCanExecute(object parameters)
