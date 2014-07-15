@@ -2,6 +2,9 @@
 
 namespace Unv.ConwayLifeGame.ViewModels
 {
+	/// <summary>
+	/// This class is the View Model for the cells.
+	/// </summary>
 	public class CellViewModel
 		: ViewModel
 	{

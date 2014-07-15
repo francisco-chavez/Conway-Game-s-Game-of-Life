@@ -16,19 +16,43 @@ namespace Unv.ConwayLifeGame.ViewModels
 		: ViewModel
 	{
 		#region Events
+		/// <summary>
+		/// This event is raised if the RowCount or ColumnCount properties are
+		/// changed when SetNewGrid(...) is called.
+		/// </summary>
 		public event EventHandler GridSizeUpdated;
 		#endregion
 
 
 		#region Attributes
+		/// <summary>
+		/// This builds the cells every time we re-populate the grid.
+		/// </summary>
 		protected CellFactory			m_cellFactory;
+
+		/// <summary>
+		/// This is holder attribute that is only here to cut down 
+		/// on the time it takes the m_cellStepProgressor to do its thing
+		/// </summary>
 		protected CellViewModel[]		m_cells;
+
+		///<summary>
+		/// The item is what updates the states of the cells
+		/// </summary>
 		protected ConwayCellProgressor	m_cellStepProgressor	= new ConwayCellProgressor();
+
+		///<summary>
+		/// This timer is for keeping the auto-progression going
+		/// </summary>
 		protected DispatcherTimer		m_timer					= new DispatcherTimer(DispatcherPriority.Input);
 		#endregion
 
 
 		#region Properties
+		/// <summary>
+		/// This command will start/stop the autoprogression of
+		/// the game.
+		/// </summary>
 		public ICommand StartStopCommand
 		{
 			get
@@ -41,6 +65,10 @@ namespace Unv.ConwayLifeGame.ViewModels
 		}
 		private RelayCommand m_startStopCommand;
 
+		/// <summary>
+		/// This command will progress through one step of the
+		/// game.
+		/// </summary>
 		public ICommand StepCommand
 		{
 			get
@@ -202,17 +230,21 @@ namespace Unv.ConwayLifeGame.ViewModels
 		public virtual void SetNewGrid(int columnCount, int rowCount)
 		{
 			if (IsBusy)
-				throw new InvalidOperationException("The Cell Grid View Model is too busy to changes its settings right now.");
-			
+				throw new InvalidOperationException("The Cell Grid View Model is too busy to make changes to its settings right now.");
+
 			this.IsBusy				= true;
 			this.CellGridState		= CellGridState.LoadingCells;
+
+			int prevRowCount		= this.RowCount;
+			int	prevColumnCount		= this.ColumnCount;
+
 			this.ColumnCount		= columnCount;
 			this.RowCount			= rowCount;
 			this.CellGeneration		= 0;
 
 			this.Cells.Clear();
 
-			if (GridSizeUpdated != null)
+			if ((columnCount != prevColumnCount || rowCount != prevRowCount) && GridSizeUpdated != null)
 				GridSizeUpdated(this, null);
 
 			m_cellFactory.CreateCellsAsync();
@@ -274,6 +306,11 @@ namespace Unv.ConwayLifeGame.ViewModels
 			}
 		}
 
+		/// <summary>
+		/// This method will run the cells through one step of the
+		/// m_cellStepProgressor and then increment the generation
+		/// counter.
+		/// </summary>
 		protected void StepCells()
 		{
 			m_cellStepProgressor.StepCells(m_cells, this.ColumnCount, this.RowCount);

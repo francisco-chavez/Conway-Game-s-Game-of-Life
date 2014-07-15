@@ -5,10 +5,16 @@ using Unv.ConwayLifeGame.Dialogs;
 
 namespace Unv.ConwayLifeGame.ViewModels
 {
+	/// <summary>
+	/// This class is the ViewModel for the MainWindow
+	/// </summary>
 	public class MainWindowViewModel
 		: ViewModel
 	{
 		#region Properties
+		/// <summary>
+		/// Gets the ViewModel of the Cell Grid.
+		/// </summary>
 		public virtual CellGridViewModel CellGridViewModel
 		{
 			get { return mn_cellGridViewModel; }
@@ -22,10 +28,11 @@ namespace Unv.ConwayLifeGame.ViewModels
 			}
 		}
 		private CellGridViewModel mn_cellGridViewModel;
-		#endregion
 
-
-		#region Properties
+		/// <summary>
+		/// Gets the command that both resets and resizes the
+		/// cell grid.
+		/// </summary>
 		public ICommand CreateNewCellGridCommand
 		{
 			get
