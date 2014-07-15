@@ -209,20 +209,46 @@ namespace Unv.ConwayLifeGame.ViewModels
 
 		private void StartStopGameProgress(object parameters)
 		{
+			throw new NotImplementedException();
 		}
 
 		private bool StartStopGameProgressCanExecute(object parameters)
 		{
-			return false;
+			switch (this.CellGridState)
+			{
+			case CellGridState.ManualProgression:
+			case CellGridState.SettingInitialGeneration:
+			case CellGridState.AutoProgression:
+				return true;
+
+			case CellGridState.LoadingCells:
+				return false;
+
+			default:
+				return false;
+			}
 		}
 
 		private void GameProgressStep(object parameters)
 		{
+			throw new NotImplementedException();
 		}
 
 		private bool GameProgressStepCanExecute(object parameters)
 		{
-			return false;
+			switch (this.CellGridState)
+			{
+			case CellGridState.ManualProgression:
+			case CellGridState.SettingInitialGeneration:
+				return true;
+
+			case CellGridState.AutoProgression:
+			case CellGridState.LoadingCells:
+				return false;
+
+			default:
+				return false;
+			}
 		}
 		#endregion
 	}
