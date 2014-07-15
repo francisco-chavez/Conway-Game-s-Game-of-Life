@@ -18,7 +18,7 @@ namespace Unv.ConwayLifeGame.Views
 	/// Yes, I know that I coupled the CellGridView to the CellGridViewModel, but
 	/// please keep in mind that the CellGridViewModel is NOT coupled to the
 	/// CellGridView. Most views in MVVM are sort of coupled to their view-models
-	/// because the bindings tend to be hard coded. 
+	/// because the bindings tend to be hard coded in XAML. 
 	/// -FCT
 	/// </remarks>
 	public partial class CellGridView 
@@ -32,6 +32,9 @@ namespace Unv.ConwayLifeGame.Views
 
 
 		#region Properties
+		/// <summary>
+		/// Gets or sets the ViewModel for this View.
+		/// </summary>
 		public CellGridViewModel ViewModel
 		{
 			get { return (CellGridViewModel) GetValue(ViewModelProperty); }
@@ -59,18 +62,28 @@ namespace Unv.ConwayLifeGame.Views
 
 			Binding b;
 
-			//b = new Binding("CellGridState");
-			//b.Mode = BindingMode.OneWay;
-			//b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-			//this.SetBinding(CellGridStateProperty, b);
-
+			// This binding will make it so that the User can't click
+			// on the CellViews when the CellGridState is not in a
+			// SeedingState. Could I have done this binding in XAML,
+			// yes I could have.
+			// -FCT
 			b = new Binding();
-			b.Path = new PropertyPath("CellGridState");
-			b.Mode = BindingMode.OneWay;
+			b.Path				= new PropertyPath("CellGridState");
+			b.Mode				= BindingMode.OneWay;
 			b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-			b.Converter = new GridStateToMouseInterationConverter();
+			b.Converter			= new GridStateToMouseInterationConverter();
 			this.SetBinding(IsHitTestVisibleProperty, b);
 
+			// This binding will make sure I can reference the item
+			// in the DataContext from the ViewModel property. This
+			// way, I don't have to write the code that will caste
+			// the ViewModel into a ViewModel each time I reference
+			// the DataContext. It will still get caste eachtime
+			// I reference it, I just don't have to write the
+			// each time.
+			// It also lets me do things like registering to the
+			// events I want to listen to each time the DataContex
+			// is changed.
 			b = new Binding();
 			this.SetBinding(ViewModelProperty, b);
 
@@ -113,7 +126,7 @@ namespace Unv.ConwayLifeGame.Views
 			if (ViewModel == null)
 				return;
 
-			var cellGridPanel = FindCellGrid(this.PART_ItemsControl) as UIElement;
+			var cellGridPanel = Find_CellGridPanel(this.PART_ItemsControl) as UIElement;
 
 			if (cellGridPanel == null)
 				return;
@@ -122,19 +135,32 @@ namespace Unv.ConwayLifeGame.Views
 			CellGridPanel.SetRowCount(cellGridPanel, ViewModel.RowCount);
 		}
 
-		private DependencyObject FindCellGrid(DependencyObject parent)
+		/// <summary>
+		/// This recursive method will look for a CellGridPanel within
+		/// the VisualTree of the DependencyObject that is passed in. If
+		/// no CellGridPanel is found, it will return null. This is a
+		/// depth-search-first method.
+		/// </summary>
+		private DependencyObject Find_CellGridPanel(DependencyObject parent)
 		{
 			int childCount = VisualTreeHelper.GetChildrenCount(parent);
 			DependencyObject result = null;
 			for(int i = 0; i < childCount; i++)
 			{
+				// See if ith child is a CellGridPanel
 				result = VisualTreeHelper.GetChild(parent, i) as DependencyObject;
 
 				if (result is CellGridPanel)
 					break;
-					
-				result = FindCellGrid(result);
+				
+				// Since the ith child wan't a CellGridPanel, see if the
+				// ith child contains a CellGridPanel by making a call to
+				// Find_CellGridPanle on the ith child.
+				result = Find_CellGridPanel(result);
 
+				// If the ith child returned something other than null,
+				// then it returned a CellGridPanel, and there's no point
+				// in checking the rest of the children for a CellGridPanel.
 				if (result != null)
 					break;
 			}
@@ -144,6 +170,9 @@ namespace Unv.ConwayLifeGame.Views
 		#endregion
 	}
 
+	/// <summary>
+	/// This method converts a CellGridState into permission to allow mouse clicks.
+	/// </summary>
 	public class GridStateToMouseInterationConverter
 		: IValueConverter
 	{
