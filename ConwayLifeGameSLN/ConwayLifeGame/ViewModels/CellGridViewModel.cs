@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 using Unv.ConwayLifeGame.Helpers;
 using Unv.ConwayLifeGame.Model;
@@ -25,7 +26,8 @@ namespace Unv.ConwayLifeGame.ViewModels
 		#region Attributes
 		protected CellFactory			m_cellFactory;
 		protected CellViewModel[]		m_cells;
-		protected ConwayCellProgressor	m_cellStepProgressor = new ConwayCellProgressor();
+		protected ConwayCellProgressor	m_cellStepProgressor	= new ConwayCellProgressor();
+		protected DispatcherTimer		m_timer					= new DispatcherTimer(DispatcherPriority.Input);
 		#endregion
 
 
@@ -173,11 +175,19 @@ namespace Unv.ConwayLifeGame.ViewModels
 
 			m_cellFactory = new CellFactory(this);
 			m_cellFactory.CellCreationFinished += CellFactory_CellCreationFinished;
+
+			m_timer.Interval = TimeSpan.FromMilliseconds(700);
+			m_timer.Tick += Timer_Tick;
 		}
 		#endregion
 
 
 		#region Event Handlers
+		void Timer_Tick(object sender, EventArgs e)
+		{
+			StepCells();
+		}
+
 		void CellFactory_CellCreationFinished(object sender, EventArgs e)
 		{
 			m_cells = this.Cells.ToArray();
@@ -213,7 +223,18 @@ namespace Unv.ConwayLifeGame.ViewModels
 
 		private void StartStopGameProgress(object parameters)
 		{
-			throw new NotImplementedException();
+			if (m_timer.IsEnabled)
+			{
+				m_timer.Stop();
+				this.CellGridState = CellGridState.ManualProgression;
+				this.IsBusy = false;
+			}
+			else
+			{
+				this.IsBusy = true;
+				m_timer.Start();
+				this.CellGridState = CellGridState.AutoProgression;
+			}
 		}
 
 		private bool StartStopGameProgressCanExecute(object parameters)
@@ -236,8 +257,7 @@ namespace Unv.ConwayLifeGame.ViewModels
 		private void GameProgressStep(object parameters)
 		{
 			this.CellGridState = CellGridState.ManualProgression;
-			m_cellStepProgressor.StepCells(m_cells, this.ColumnCount, this.RowCount);
-			this.CellGeneration++;
+			StepCells();
 		}
 
 		private bool GameProgressStepCanExecute(object parameters)
@@ -255,6 +275,12 @@ namespace Unv.ConwayLifeGame.ViewModels
 			default:
 				return false;
 			}
+		}
+
+		protected void StepCells()
+		{
+			m_cellStepProgressor.StepCells(m_cells, this.ColumnCount, this.RowCount);
+			this.CellGeneration++;
 		}
 		#endregion
 	}
