@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Input;
 
 using Unv.ConwayLifeGame.Helpers;
 using Unv.ConwayLifeGame.Model;
@@ -27,6 +28,30 @@ namespace Unv.ConwayLifeGame.ViewModels
 
 
 		#region Properties
+		public ICommand StartStopCommand
+		{
+			get
+			{
+				if (m_startStopCommand == null)
+					m_startStopCommand = new RelayCommand(StartStopGameProgress, StartStopGameProgressCanExecute);
+
+				return m_startStopCommand;
+			}
+		}
+		private RelayCommand m_startStopCommand;
+
+		public ICommand StepCommand
+		{
+			get
+			{
+				if (m_stepCommand == null)
+					m_stepCommand = new RelayCommand(GameProgressStep, GameProgressStepCanExecute);
+
+				return m_stepCommand;
+			}
+		}
+		private RelayCommand m_stepCommand;
+
 		/// <summary>
 		/// Gets the number of rows in the cell grid.
 		/// </summary>
@@ -180,6 +205,24 @@ namespace Unv.ConwayLifeGame.ViewModels
 				GridSizeUpdated(this, null);
 
 			m_cellFactory.CreateCellsAsync();
+		}
+
+		private void StartStopGameProgress(object parameters)
+		{
+		}
+
+		private bool StartStopGameProgressCanExecute(object parameters)
+		{
+			return false;
+		}
+
+		private void GameProgressStep(object parameters)
+		{
+		}
+
+		private bool GameProgressStepCanExecute(object parameters)
+		{
+			return false;
 		}
 		#endregion
 	}

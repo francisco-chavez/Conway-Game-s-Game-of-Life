@@ -81,10 +81,7 @@ namespace Unv.ConwayLifeGame.ViewModels
 
 		private bool CreateNewCellGridCanExecute(object parameters)
 		{
-			if (this.CellGridViewModel.IsBusy)
-				return false;
-
-			return true;
+			return !this.CellGridViewModel.IsBusy;
 		}
 		#endregion
 	}

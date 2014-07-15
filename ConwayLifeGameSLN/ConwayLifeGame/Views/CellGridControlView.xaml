@@ -25,7 +25,9 @@
 		<Button Content="{Binding Path=IsOnAuto, 
 								  Mode=OneWay, 
 								  UpdateSourceTrigger=PropertyChanged, 
-								  Converter={StaticResource ButtonContentConverter}}"/>
-		<Button Content="Step"/>
+								  Converter={StaticResource ButtonContentConverter}}"
+				Command="{Binding StartStopCommand}"/>
+		<Button Content="Step"
+				Command="{Binding StepCommand}"/>
 	</StackPanel>
 </UserControl>
