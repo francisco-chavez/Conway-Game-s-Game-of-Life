@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="Helpers\BoolToContentConverter.cs" />
     <Compile Include="Helpers\CellFactory.cs" />
+    <Compile Include="Helpers\ConwayCellProgressor.cs" />
     <Compile Include="INPC.cs" />
     <Compile Include="Model\CellGridState.cs" />
     <Compile Include="RelayCommand.cs" />
