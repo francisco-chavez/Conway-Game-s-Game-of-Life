@@ -8,6 +8,10 @@ using Unv.ConwayLifeGame.ViewModels;
 
 namespace Unv.ConwayLifeGame.Helpers
 {
+	/// <summary>
+	/// This class is used to create and set up the CellViewModels and then
+	/// populate the CellGridViewModel with said cells.
+	/// </summary>
 	public class CellFactory
 	{
 		#region Events

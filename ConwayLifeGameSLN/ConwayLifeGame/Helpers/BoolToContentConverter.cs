@@ -5,6 +5,10 @@ using System.Windows.Data;
 
 namespace Unv.ConwayLifeGame.Helpers
 {
+	/// <summary>
+	/// This converter class lets you convert a Nullable&lt;bool&gt;'s values
+	/// into any object within a binding.
+	/// </summary>
 	public class BoolToContentConverter
 		: IValueConverter
 	{

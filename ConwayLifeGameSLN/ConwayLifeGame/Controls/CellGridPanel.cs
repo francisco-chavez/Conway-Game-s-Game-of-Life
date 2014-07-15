@@ -4,6 +4,11 @@ using System.Windows.Controls;
 
 namespace Unv.ConwayLifeGame.Controls
 {
+	/// <summary>
+	/// This Grid Panel lets you change the number of columns and rows
+	/// at run time, and it can be told apart from other Grid panels
+	/// by the class type.
+	/// </summary>
 	public class CellGridPanel
 		: Grid
 	{

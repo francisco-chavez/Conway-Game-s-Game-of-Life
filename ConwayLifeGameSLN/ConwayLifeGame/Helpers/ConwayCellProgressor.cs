@@ -4,6 +4,10 @@ using Unv.ConwayLifeGame.ViewModels;
 
 namespace Unv.ConwayLifeGame.Helpers
 {
+	/// <summary>
+	/// This class will update the living state of all cells
+	/// within a CellGridViewModel.
+	/// </summary>
 	public class ConwayCellProgressor
 	{
 		public virtual void StepCells(CellViewModel[] cells, int columns, int rows)
