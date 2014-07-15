@@ -10,7 +10,6 @@ namespace Unv.ConwayLifeGame.Views
 	{
 		#region Attributes
 		public static readonly DependencyProperty IsAliveProperty;
-		public static readonly DependencyProperty AcceptsManualInputProperty;
 		#endregion
 
 
@@ -19,12 +18,6 @@ namespace Unv.ConwayLifeGame.Views
 		{
 			get { return (bool) GetValue(IsAliveProperty); }
 			set { SetValue(IsAliveProperty, value); }
-		}
-
-		public bool AcceptsManualInput
-		{
-			get { return GetAcceptsManualInput(this); }
-			set { SetAcceptsManualInput(this, value); }
 		}
 		#endregion
 
@@ -42,14 +35,6 @@ namespace Unv.ConwayLifeGame.Views
 				typeof(bool),
 				typeof(CellView),
 				new FrameworkPropertyMetadata(false));
-
-			AcceptsManualInputProperty = DependencyProperty.RegisterAttached(
-				"AcceptsManualInput",
-				typeof(bool),
-				typeof(CellView),
-				new FrameworkPropertyMetadata(
-					true,
-					FrameworkPropertyMetadataOptions.Inherits));
 		}
 
 		public CellView()
@@ -61,18 +46,6 @@ namespace Unv.ConwayLifeGame.Views
 			b.Mode = BindingMode.TwoWay;
 			b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
 			this.SetBinding(CellView.IsAliveProperty, b);
-
-			b = new Binding();
-			b.Path = new PropertyPath("Row");
-			b.Mode = BindingMode.OneWay;
-			b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-			this.SetBinding(Grid.RowProperty, b);
-
-			b = new Binding();
-			b.Path = new PropertyPath("Column");
-			b.Mode = BindingMode.OneWay;
-			b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-			this.SetBinding(Grid.ColumnProperty, b);
 		}
 		#endregion
 
@@ -80,21 +53,7 @@ namespace Unv.ConwayLifeGame.Views
 		#region Event Handlers
 		void Cell_Click(object sender, RoutedEventArgs e)
 		{
-			if (AcceptsManualInput)
-				this.IsAlive = !this.IsAlive;
-		}
-		#endregion
-
-
-		#region Methods
-		public static void SetAcceptsManualInput(UIElement element, bool value)
-		{
-			element.SetValue(AcceptsManualInputProperty, value);
-		}
-
-		public static bool GetAcceptsManualInput(UIElement element)
-		{
-			return (bool) element.GetValue(AcceptsManualInputProperty);
+			this.IsAlive = !this.IsAlive;
 		}
 		#endregion
 	}
